@@ -1,0 +1,89 @@
+Redis connection failed (Timeout connecting to server). Cache will run without Redis.
+[Cache] Partial clear — Redis: False, Mongo: True, SQLite: True
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[*] Initializing local SentenceTransformer ('all-MiniLM-L6-v2') model...
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 1299.51it/s]
+2026-09-26 21:37:24,818 - phase5_embedder - INFO - Local SentenceTransformer model ('all-MiniLM-L6-v2') loaded successfully.
+2026-09-26 21:37:25,227 - phase9_gemini_client - INFO - Groq primary client initialized with model: openai/gpt-oss-120b
+2026-09-26 21:37:26,510 - phase9_gemini_client - INFO - Google Gemini fallback client initialized with model: gemini-2.5-flash
+2026-09-26 21:37:26,511 - web_grounded_rag_app - INFO - Pipeline components pre-warmed and ready.
+2026-09-26 21:37:26,511 - web_grounded_rag_app - INFO - [RESEARCH] depth=quick target_sources=5
+2026-09-26 21:37:26,511 - web_grounded_rag_app - INFO - [GENERATION] depth=quick max_output_tokens=600
+2026-09-26 21:37:26,511 - web_grounded_rag_app - INFO - RAG Pipeline Run started for query: 'What is binary search and how does it work?' (user_id='default_user', chat_id='None', research_depth='quick')
+2026-09-26 21:37:26,511 - web_grounded_rag_app - INFO - [CONTEXT] Loaded 0 recent messages
+2026-09-26 21:37:26,513 - web_grounded_rag_app - INFO - [CONTEXT] Independent query - no reformulation required
+2026-09-26 21:37:26,589 - web_grounded_rag_app - INFO - [CACHE ROUTE] FULL RAG MISS | user_id='default_user' | normalized_query='binary search and how does it work' | query_hash='ee200cfcce39...' | intent='concept_explanation' | scope='binary search does it work' | similarity=0.000 | cache source=None
+
+============================================================
+ QUERY OPTIMIZATION 
+============================================================
+2026-09-26 21:37:26,589 - phase1_web_search - INFO - Optimizing raw query: 'What is binary search and how does it work?'
+2026-09-26 21:38:03,039 - phase1_web_search - INFO - Optimized query: 'binary search algorithm documentation overview engineering'
+[+] Optimized search query: 'binary search algorithm documentation overview engineering'
+
+============================================================
+ PHASE 1: BROAD WEB SEARCH (TAVILY) 
+============================================================
+2026-09-26 21:38:03,039 - phase1_web_search - INFO - Initiating broad web search for query: 'binary search algorithm documentation overview engineering'
+[*] Connecting to Tavily Search API (Broad Web Search)...
+[-] Searching broader web for query: 'binary search algorithm documentation overview engineering'...
+2026-09-26 21:38:06,907 - phase1_web_search - INFO - Tavily API returned 10 candidate search results from the broader web.
+[+] Discovered 10 candidate web sources.
+
+============================================================
+ PHASE 2: URL VALIDATION & DEDUPLICATION 
+============================================================
+2026-09-26 21:38:06,907 - phase2_result_filter - INFO - Filtering and validating 10 candidate search results.
+[*] Validating URL quality, normalizing schemes, and removing duplicates...
+[-] [1/10] Validating URL quality: https://www.sciencedirect.com/topics/engineering/binary...
+2026-09-26 21:38:06,907 - phase2_result_filter - INFO - VALIDATED URL: 'https://www.sciencedirect.com/topics/engineering/binary-search' (Score: 0.7039)
+[-] [2/10] Validating URL quality: https://www.scribd.com/document/582552360/binary-search...
+2026-09-26 21:38:06,907 - phase2_result_filter - INFO - VALIDATED URL: 'https://www.scribd.com/document/582552360/binary-search1' (Score: 0.6915)
+[-] [3/10] Validating URL quality: https://en.wikipedia.org/wiki/Binary_search...
+2026-09-26 21:38:06,907 - phase2_result_filter - INFO - VALIDATED URL: 'https://en.wikipedia.org/wiki/Binary_search' (Score: 0.6839)
+[-] [4/10] Validating URL quality: https://dev.to/kaxmoglan/the-binary-search-algorithm-51...
+2026-09-26 21:38:06,907 - phase2_result_filter - INFO - VALIDATED URL: 'https://dev.to/kaxmoglan/the-binary-search-algorithm-51ao' (Score: 0.6544)
+[-] [5/10] Validating URL quality: https://www.w3schools.com/dsa/dsa_algo_binarysearch.php...
+2026-09-26 21:38:06,908 - phase2_result_filter - INFO - VALIDATED URL: 'https://www.w3schools.com/dsa/dsa_algo_binarysearch.php' (Score: 0.6214)
+[-] [6/10] Validating URL quality: https://medium.com/@yakubakku43/binary-search-algorithm...
+2026-09-26 21:38:06,908 - phase2_result_filter - INFO - VALIDATED URL: 'https://medium.com/@yakubakku43/binary-search-algorithm-simplified-and-practical-guide-for-beginners-fe8a5dfd8a5f' (Score: 0.6200)
+[-] [7/10] Validating URL quality: https://www.codecademy.com/resources/docs/general/algor...
+2026-09-26 21:38:06,908 - phase2_result_filter - INFO - VALIDATED URL: 'https://www.codecademy.com/resources/docs/general/algorithm/binary-search' (Score: 0.6192)
+[-] [8/10] Validating URL quality: https://www.geeksforgeeks.org/dsa/binary-search...
+2026-09-26 21:38:06,908 - phase2_result_filter - INFO - VALIDATED URL: 'https://www.geeksforgeeks.org/dsa/binary-search' (Score: 0.6128)
+[-] [9/10] Validating URL quality: https://www.leoniemonigatti.com/blog/binary-search.html...
+2026-09-26 21:38:06,908 - phase2_result_filter - INFO - VALIDATED URL: 'https://www.leoniemonigatti.com/blog/binary-search.html' (Score: 0.6067)
+[-] [10/10] Validating URL quality: https://cp-algorithms.com/num_methods/binary_search.htm...
+2026-09-26 21:38:06,908 - phase2_result_filter - INFO - VALIDATED URL: 'https://cp-algorithms.com/num_methods/binary_search.html' (Score: 0.5459)
+2026-09-26 21:38:06,908 - phase2_result_filter - INFO - Filtering complete. Candidates: 10 | Validated: 10 | Rejected: 0
+[+] Retained 10 unique, valid URLs.
+2026-09-26 21:38:06,917 - web_grounded_rag_app - INFO - [RESEARCH MORE] Existing sources=0
+2026-09-26 21:38:06,917 - web_grounded_rag_app - INFO - [RESEARCH MORE] Additional sources requested=5
+2026-09-26 21:38:06,918 - web_grounded_rag_app - INFO - [RESEARCH MORE] New unique sources=5
+
+============================================================
+ PHASE 3: PARALLEL WEB EXTRACTION 
+============================================================
+2026-09-26 21:38:06,918 - phase3_website_loader - INFO - Starting concurrent loading for 5 URLs with 5 parallel workers.
+[*] Fetching and parsing 5 web pages concurrently (workers=5)...
+2026-09-26 21:38:06,921 - phase3_website_loader - INFO - Attempting Trafilatura download/parse for URL: https://www.sciencedirect.com/topics/engineering/binary-search
+2026-09-26 21:38:06,924 - phase3_website_loader - INFO - Attempting Trafilatura download/parse for URL: https://dev.to/kaxmoglan/the-binary-search-algorithm-51ao
+2026-09-26 21:38:06,925 - phase3_website_loader - INFO - Attempting Trafilatura download/parse for URL: https://www.w3schools.com/dsa/dsa_algo_binarysearch.php
+2026-09-26 21:38:06,929 - phase3_website_loader - INFO - Attempting Trafilatura download/parse for URL: https://www.scribd.com/document/582552360/binary-search1
+2026-09-26 21:38:06,943 - phase3_website_loader - INFO - Attempting Trafilatura download/parse for URL: https://en.wikipedia.org/wiki/Binary_search
+2026-09-26 21:38:08,514 - phase3_website_loader - INFO - Successfully loaded 'https://dev.to/kaxmoglan/the-binary-search-algorithm-51ao' using Trafilatura.
+2026-09-26 21:38:09,390 - phase3_website_loader - WARNING - HTTP error for 'https://www.sciencedirect.com/topics/engineering/binary-search': 403 Client Error: Forbidden for url: https://www.sciencedirect.com/topics/engineering/binary-search. Skipping slow fallbacks.
+2026-09-26 21:38:09,828 - phase3_website_loader - INFO - Successfully loaded 'https://www.scribd.com/document/582552360/binary-search1' using Trafilatura.
+2026-09-26 21:38:10,016 - phase3_website_loader - INFO - Successfully loaded 'https://www.w3schools.com/dsa/dsa_algo_binarysearch.php' using Trafilatura.
+2026-09-26 21:38:11,124 - phase3_website_loader - INFO - Successfully loaded 'https://en.wikipedia.org/wiki/Binary_search' using Trafilatura.
+[x] [1/5] Load failed via Failed (2.472s): 403 Client Error: Forbidden for url: https://www.sciencedirect.com/topics/engineering/binary-search for https://www.sciencedirect.com/topics/engineering/binary-sear...
+[+] [2/5] Loaded successfully via Trafilatura (2.972s, 286 chars): https://www.scribd.com/document/582552360/binary-search1...
+[+] [3/5] Loaded successfully via Trafilatura (4.241s, 58011 chars): https://en.wikipedia.org/wiki/Binary_search...
+[+] [4/5] Loaded successfully via Trafilatura (1.638s, 3618 chars): https://dev.to/kaxmoglan/the-binary-search-algorithm-51ao...
+[+] [5/5] Loaded successfully via Trafilatura (3.153s, 6435 chars): https://www.w3schools.com/dsa/dsa_algo_binarysearch.php...
+[+] Successfully scraped and extracted 4 of 5 web pages.
+
+============================================================
+ PHASE 4: CHUNKING 
+============================================================
+2026-09-26 21:38:11,165 - phase4_chunker - INFO - Chunking 4 loaded documents.

@@ -1,0 +1,309 @@
+[
+  {
+    "id": "chat_hdufm3es_1790529537098",
+    "title": "What is MongoDB and how does it work?",
+    "active": true,
+    "messages": [
+      {
+        "role": "user",
+        "text": "What is MongoDB and how does it work?"
+      },
+      {
+        "role": "assistant",
+        "text": "**Definition / Overview**  \nMongoDB is a document\u2011oriented NoSQL database that stores data in flexible, JSON\u2011like documents. It is designed to let developers model data the same way their application code does, allowing schema evolution without downtime. MongoDB is fully transactional and supports a wide range of workloads, from rapid prototyping to mission\u2011critical production systems. It offers a powerful query engine, horizontal scaling, and built\u2011in high availability.\u202f[1]\n\n**How It Works**  \n- **Document Model**: Data is organized into collections of documents. Each document is a BSON (binary JSON) object that can contain nested fields, arrays, and varying structures.  \n- **Schema\u2011less Design**: Collections do not require a predefined schema, so documents can have different fields. This flexibility lets developers iterate quickly and adapt to changing data needs.  \n- **Query Engine**: MongoDB provides a rich query language that can filter, project, aggregate, and index documents.  \n- **Horizontal Scaling**: Data can be sharded across multiple servers, allowing the database to grow with the application\u2019s needs.  \n- **High Availability**: Replica sets keep copies of data on multiple nodes, automatically promoting a secondary to primary if the primary fails.  \n- **Transactions**: MongoDB supports multi\u2011document ACID transactions, ensuring data consistency across complex operations.  \n\n**Drivers & SDKs**  \nMongoDB supplies official drivers for many programming languages (e.g., Node.js, Java, Python). These SDKs enable developers to connect, query, and manipulate data asynchronously or synchronously, depending on the language. The Node.js driver, for example, offers non\u2011blocking operations for efficient interaction.\u202f[3]\n\n**Example Scenario**  \nA web application stores user profiles in a `users` collection. Each profile document can include fields like `name`, `email`, `preferences`, and an array of `orders`. Because the schema is flexible, new fields (e.g., `profilePicture`) can be added later without affecting existing documents or requiring downtime.\n\n**Practical Takeaway**  \nMongoDB\u2019s document model, flexible schema, and built\u2011in scalability make it a popular choice for developers building modern, data\u2011intensive applications that need to evolve quickly.\u202f[4][5]\n\n**References**  \n- [What is MongoDB? - Database Manual](https://www.mongodb.com/docs/manual)  \n- [Introduction to MongoDB for Developers Blog \u2013 Drivers & SDKs](https://www.icertglobal.com/blog/introduction-to-mongodb-for-developers-blog)  \n- [Introduction to MongoDB for Developers Blog \u2013 Overview](https://www.icertglobal.com/blog/introduction-to-mongodb-for-developers-blog)",
+        "sources": [
+          {
+            "title": "What is MongoDB? - Database Manual",
+            "meta": "Web Source \u00b7 www.mongodb.com",
+            "snippet": "Retrieved web source context from What is MongoDB? - Database Manual (https://www.mongodb.com/docs/manual).",
+            "url": "https://www.mongodb.com/docs/manual"
+          },
+          {
+            "title": "introduction to mongodb for developers blog",
+            "meta": "Web Source \u00b7 www.icertglobal.com",
+            "snippet": "Retrieved web source context from introduction to mongodb for developers blog (https://www.icertglobal.com/blog/introduction-to-mongodb-for-developers-blog).",
+            "url": "https://www.icertglobal.com/blog/introduction-to-mongodb-for-developers-blog"
+          }
+        ],
+        "research_depth": "quick",
+        "sources_analyzed": 5,
+        "sources_used": 2,
+        "cache_mode": "KNOWLEDGE_REUSE"
+      },
+      {
+        "role": "user",
+        "text": "Explain REST API architecture and its main components."
+      },
+      {
+        "role": "assistant",
+        "text": "**Definition / Overview**  \nA REST API (Representational State Transfer Application Programming Interface) is an architectural style for designing networked applications. It relies on a set of rules and constraints that, when followed, produce web services that are simple, scalable, and easy to integrate. REST revolves around *resources*\u2014any piece of information such as a user, product, document, or collection of items\u2014and exposes them through a uniform interface over HTTP.  \n[1][2]\n\n---\n\n### Core Components of a REST API\n\n| Component | What it is | Why it matters | Example |\n|-----------|------------|----------------|---------|\n| **URL Endpoint** | A Uniform Resource Locator that identifies a specific resource or collection. | It tells the server exactly which resource the client wants to interact with. | `https://api.example.com/surveys/123/responses` |\n| **HTTP Verb (Method)** | The action the client wants to perform on the resource. Common verbs: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`. | Provides a simple, consistent way to express CRUD operations. | `POST` to create a new survey template |\n| **Request Body** | Optional payload sent with the request, usually in JSON or XML. | Carries data needed to create or update a resource. | `{ \"title\": \"Customer Feedback\", \"questions\": [...] }` |\n| **Headers** | Key\u2011value pairs that convey metadata (e.g., authentication tokens, content type). | Enables authentication, content negotiation, caching, etc. | `Authorization: Bearer <token>` |\n| **Status Code** | Numeric response indicating the result of the request (e.g., 200 OK, 404 Not Found, 500 Internal Server Error). | Communicates success or failure to the client. | `201 Created` after a successful POST |\n| **Response Body** | Data returned by the server, often in JSON. | Provides the requested resource or confirmation of an action. | `{ \"id\": 123, \"title\": \"Customer Feedback\", ... }` |\n\n*Sources:* [4] (URL, verb, body), [1] (resources, statelessness), [2] (unique resource identifier via URL)\n\n---\n\n### How a REST Request Is Processed\n\n1. **Client sends an HTTP request** to a specific URL endpoint, including the desired verb and any necessary headers or body.  \n2. **Server receives the request** and parses the URL to identify the target resource.  \n3. **Server performs the requested action** (e.g., read, create, update, delete) on the resource, often interacting with a database.  \n4. **Server returns an HTTP response** with an appropriate status code, headers, and a response body if applicable.  \n5. **Client interprets the response** and acts accordingly (display data, show error, retry, etc.).  \n\nBecause REST is stateless, each request contains all information needed for the server to understand and process it; the server does not store client context between requests. This simplifies scaling and caching.  \n[1]\n\n---\n\n### Practical Example\n\n```http\nPOST https://api.example.com/surveys\nContent-Type: application/json\nAuthorization: Bearer abc123\n\n{\n  \"title\": \"Product Feedback\",\n  \"questions\": [\n    { \"text\": \"How would you rate the product?\", \"type\": \"rating\" },\n    { \"text\": \"Any suggestions?\", \"type\": \"text\" }\n  ]\n}\n```\n\n- **Endpoint**: `/surveys` (collection of surveys)  \n- **Verb**: `POST` (create new survey)  \n- **Body**: JSON payload with survey details  \n- **Headers**: `Content-Type` and `Authorization` for authentication  \n\nServer response:\n\n```http\nHTTP/1.1 201 Created\nContent-Type: application/json\n\n{\n  \"id\": 456,\n  \"title\": \"Product Feedback\",\n  \"created_at\": \"2024-09-27T12:34:56Z\"\n}\n```\n\n---\n\n### Key Design Principles\n\n| Principle | Description | Benefit |\n|-----------|-------------|---------|\n| **Uniform Interface** | Standardized methods (GET, POST, etc.) and media types (JSON, XML). | Predictable interactions across services. |\n| **Statelessness** | Each request is independent; no server\u2011side session. | Easier horizontal scaling and caching. |\n| **Cacheability** | Responses can be cached based on headers. | Improves performance and reduces load. |\n| **Layered System** | Clients cannot see beyond the immediate server layer. | Enables load balancers, proxies, and security layers. |\n| **Code on Demand (optional)** | Servers can send executable code (e.g., JavaScript). | Extends functionality but rarely used in modern APIs. |\n\n[1] (statelessness, scalability)\n\n---\n\n### Common Use Cases\n\n- **Public APIs**: Weather data, maps, social media feeds.  \n- **Internal microservices**: Service\u2011to\u2011service communication within a cloud architecture.  \n- **Mobile & web front\u2011ends**: CRUD operations on user data, content management, e\u2011commerce catalogs.  \n\n---\n\n### Practical Considerations\n\n| Consideration | What to Watch For | Tips |\n|---------------|-------------------|------|\n| **Authentication** | Token\u2011based (OAuth2, JWT) or API keys. | Use HTTPS to protect credentials. |\n| **Rate Limiting** | Prevent abuse by limiting request frequency. | Return `429 Too Many Requests` with `Retry-After`. |\n| **Versioning** | Avoid breaking clients when changing API. | Include version in URL (`/v1/`) or header. |\n| **Error Handling** | Clear, consistent error responses. | Use standard status codes and a JSON error body. |\n| **Documentation** | Essential for developers. | Provide OpenAPI/Swagger specs. |\n\n[4] (HTTP verb, body), [2] (unique resource identifier)\n\n---\n\n**Summary / Key Takeaways**\n\n- REST APIs expose resources via URLs and manipulate them with standard HTTP verbs.  \n- Each request is stateless, containing all needed information, which simplifies scaling.  \n- Core components\u2014URL endpoint, verb, body, headers, status code, response body\u2014work together to form a predictable, interoperable interface.  \n- Following REST principles (uniform interface, statelessness, cacheability, layered system) yields services yield services that are scalable, maintainable, and interoperable.\n\n**Key Takeaways**\n\n- REST APIs expose resources through URLs and manipulate them with standard HTTP verbs (GET, POST, PUT, DELETE, etc.).  \n- Every request is stateless, carrying all necessary information, which simplifies horizontal scaling and caching.  \n- Core components\u2014URL endpoint, HTTP verb, request body, headers, status code, and response body\u2014work together to create a predictable, interoperable interface.  \n- Adhering to the core REST principles (uniform interface, statelessness, cacheability, layered system, optional code\u2011on\u2011demand) results in services that are easier to evolve, secure, and document.  \n- Practical considerations such as authentication, rate limiting, versioning, error handling, and thorough documentation are essential for robust, developer\u2011friendly APIs.\n\n**References**\n\n- [1] (statelessness, scalability)  \n- [2] (unique resource identifier)  \n- [4] (HTTP verb, body)",
+        "sources": [
+          {
+            "title": "REST API basics and implementation",
+            "meta": "Web Source \u00b7 cloud.google.com",
+            "snippet": "Retrieved web source context from REST API basics and implementation (https://cloud.google.com/discover/what-is-rest-api).",
+            "url": "https://cloud.google.com/discover/what-is-rest-api"
+          },
+          {
+            "title": "What is RESTful API? - RESTful API Explained",
+            "meta": "Web Source \u00b7 aws.amazon.com",
+            "snippet": "Retrieved web source context from What is RESTful API? - RESTful API Explained (https://aws.amazon.com/what-is/restful-api).",
+            "url": "https://aws.amazon.com/what-is/restful-api"
+          },
+          {
+            "title": "REST API Basics - 4 Things you Need to Know",
+            "meta": "Web Source \u00b7 mannhowie.com",
+            "snippet": "Retrieved web source context from REST API Basics - 4 Things you Need to Know (https://mannhowie.com/rest-api).",
+            "url": "https://mannhowie.com/rest-api"
+          }
+        ],
+        "research_depth": "standard",
+        "sources_analyzed": 10,
+        "sources_used": 3,
+        "cache_mode": "RAG_MISS"
+      },
+      {
+        "role": "user",
+        "text": "Explain how a RAG system works, including retrieval, embeddings, vector databases, and generation."
+      },
+      {
+        "role": "assistant",
+        "text": "**Definition / Overview**  \nRetrieval\u2011Augmented Generation (RAG) is a framework that combines a retrieval system with a large language model (LLM) to produce answers that are grounded in external, up\u2011to\u2011date knowledge. The system first fetches relevant information from a knowledge base, then feeds that information into the LLM\u2019s prompt so the model can generate a response that is both contextually correct and evidence\u2011based. This approach mitigates hallucinations that pure LLMs sometimes produce [1][5].\n\n---\n\n### Detailed Explanation\n\n| Stage | What Happens | Key Components | Typical Tools |\n|-------|--------------|----------------|---------------|\n| **1. Indexing** | Documents are split into manageable chunks, each chunk is converted into a dense vector embedding, and the embeddings are stored in a vector database or search index. | Chunking algorithm, embedding model, vector store | OpenAI embeddings, Sentence\u2011Transformers, Pinecone, Weaviate, Milvus |\n| **2. Retrieval** | When a user query arrives, it is embedded with the same model used during indexing. A similarity search (e.g., cosine similarity) is performed against the stored vectors to find the most relevant chunks. | Query encoder, similarity search engine | FAISS, Annoy, HNSW |\n| **3. Generation** | The retrieved chunks are inserted into the LLM\u2019s prompt as context. The LLM then generates an answer that is grounded in that evidence. | Prompt engineering, LLM | GPT\u20114, Claude, Llama\u20112 |  \n\nThis three\u2011step pipeline is often called \u201cNa\u00efve RAG\u201d because it simply concatenates retrieved text into the prompt. While effective for many use cases, it has limitations in production, such as handling large volumes of context or ensuring precise evidence usage [2].\n\n---\n\n### Key Features / Mechanics\n\n| Feature | Description | Why It Matters |\n|---------|-------------|----------------|\n| **Vector Embeddings** | Numerical representations that capture semantic meaning of text. They enable efficient similarity search. | Allows retrieval of context that is semantically related, not just keyword\u2011based. |\n| **Vector Database** | Specialized storage optimized for high\u2011dimensional vectors, supporting fast nearest\u2011neighbor queries. | Provides scalability and low latency for retrieval. |\n| **Retrieval Component** | Encodes queries, searches the vector store, returns top\u2011k relevant chunks. | First step that curates the evidence used by the LLM. |\n| **Augmentation Component** | Enhances the retrieved context (e.g., summarization, re\u2011ranking, filtering). | Improves relevance and reduces noise before generation. |\n| **Generation Component** | LLM consumes augmented context and produces the final answer. | Generates fluent, context\u2011aware responses. |\n| **Hallucination Mitigation** | By grounding the LLM in retrieved evidence, the system reduces the chance of fabricating facts. | Increases trustworthiness of outputs. |\n\n---\n\n### Practical Example\n\n1. **Indexing**  \n   *Document:* \u201cThe Eiffel Tower was completed in 1889 and stands 300\u202fm tall.\u201d  \n   *Chunk:* \u201cEiffel Tower completed 1889, 300\u202fm tall.\u201d  \n   *Embedding:* `[-0.12, 0.34, \u2026]` stored in vector DB.\n\n2. **Retrieval**  \n   *Query:* \u201cWhen was the Eiffel Tower finished?\u201d  \n   *Query embedding:* `[-0.10, 0.30, \u2026]`  \n   *Similarity search:* returns the chunk above as top\u20111.\n\n3. **Generation**  \n   *Prompt:*  \n   ```\n   Context: Eiffel Tower completed 1889, 300\u202fm tall.\n   Question: When was the Eiffel Tower finished?\n   Answer:\n   ```  \n   *LLM output:* \u201cThe Eiffel Tower was finished in 1889.\u201d  \n\nThe answer is directly supported by the retrieved chunk, reducing hallucination risk.\n\n---\n\n### Comparison & Trade\u2011offs\n\n| Aspect | Na\u00efve RAG | Advanced RAG (e.g., Context Engines, GraphRAG) |\n|--------|-----------|----------------------------------------------|\n| **Context Size** | Limited by prompt length (\u2248\u202f4\u202fk tokens for GPT\u20114). | Uses context engines or graph structures to manage larger evidence sets. |\n| **Evidence Precision** | Relies on raw retrieved text; may include irrelevant parts. | Augmentation steps (summarization, re\u2011ranking) improve precision. |\n| **Latency** | Retrieval + LLM inference; can be high if many chunks. | Optimized retrieval pipelines and caching reduce latency. |\n| **Complexity** | Simple pipeline; easy to implement. | Requires additional components (graph traversal, knowledge graphs). |\n| **Use Cases** | Question answering, content creation, research assistance. | Complex reasoning, multi\u2011step queries, domain\u2011specific knowledge graphs. |\n\nNa\u00efve RAG is often sufficient for straightforward Q&A or content generation, while advanced RAG is preferred when the system must handle intricate reasoning or large knowledge bases [2].\n\n---\n\n### Practical Applications & Limitations\n\n| Application | How RAG Helps | Limitations |\n|-------------|---------------|-------------|\n| **Question\u2011Answering Systems** | Provides precise, evidence\u2011based answers from a curated knowledge base. | Retrieval quality depends on embedding model and index coverage. |\n| **Content Creation** | Writers receive up\u2011to\u2011date facts and references automatically. | Over\u2011reliance on retrieved text may stifle creativity. |\n| **Research Assistance** | Researchers can quickly locate relevant studies or data. | Requires continuous index updates to stay current. |\n| **Enterprise Knowledge Bases** | Employees get accurate answers from internal documents. | Sensitive data must be protected; vector DB security is critical. |\n\nCommon challenges include maintaining up\u2011to\u2011date embeddings, handling ambiguous queries, and ensuring that the LLM does not hallucinate beyond the retrieved evidence. Proper prompt design, evidence verification, and monitoring are essential to mitigate these issues.\n\n---\n\n### Summary / Key Takeaways\n\n- **RAG** fuses a retrieval system with an LLM to generate grounded, context\u2011aware responses.  \n- The pipeline consists of **indexing**, **retrieval**, and **generation** stages, often enhanced by an **augmentation** step.  \n- **Vector embeddings** and **vector databases** enable semantic search, while the LLM produces fluent answers.  \n- Na\u00efve RAG works well for many use cases, but advanced techniques (context engines, GraphRAG) address scalability and precision in production.  \n- RAG is especially valuable for **question answering**, **content creation**, and **research assistance**, though it requires careful handling of embeddings, index maintenance, and hallucination mitigation.\n\n---\n\n### References\n\n- [RAG Tutorial: A Beginner's Guide to Retrieval Augmented Generation](https://www.singlestore.com/blog/a-guide-to-retrieval-augmented-generation-rag) \u2013 Overview of RAG pipeline, embeddings, and vector databases.  \n- [RAG in 2026: From Vector Search to Context Engines and GraphRAG](https://acingai.com/articles/rag-2026-context-engines-graphrag) \u2013 Details on Na\u00efve RAG, limitations, and advanced approaches.  \n- [RAG Tutorial: Key concepts in RAG](https://www.singlestore.com/blog/a-guide-to-retrieval-augmented-generation-rag) \u2013 Breakdown of retrieval, augmentation, and generation components.  \n- [RAG Tutorial: RAG applications](https://www.singlestore.com/blog/a-guide-to-retrieval-augmented-generation-rag) \u2013 Use\u2011case examples such as Q&A, content creation, and research assistance.  \n- [RAG Tutorial: Mitigating hallucinations with RAG](https://www.singlestore.com/blog/a-guide-to-retrieval-augmented-generation-rag) \u2013 Explanation of how vector databases and retrieval reduce hallucinations.",
+        "sources": [
+          {
+            "title": "RAG Tutorial: A Beginner's Guide to Retrieval Augmented Generation",
+            "meta": "Web Source \u00b7 www.singlestore.com",
+            "snippet": "Retrieved web source context from RAG Tutorial: A Beginner's Guide to Retrieval Augmented Generation (https://www.singlestore.com/blog/a-guide-to-retrieval-augmented-generation-rag).",
+            "url": "https://www.singlestore.com/blog/a-guide-to-retrieval-augmented-generation-rag"
+          },
+          {
+            "title": "RAG in 2026: From Vector Search to Context Engines and GraphRAG | Acing AI",
+            "meta": "Web Source \u00b7 acingai.com",
+            "snippet": "Retrieved web source context from RAG in 2026: From Vector Search to Context Engines and GraphRAG | Acing AI (https://acingai.com/articles/rag-2026-context-engines-graphrag).",
+            "url": "https://acingai.com/articles/rag-2026-context-engines-graphrag"
+          }
+        ],
+        "research_depth": "deep",
+        "sources_analyzed": 15,
+        "sources_used": 2,
+        "cache_mode": "RAG_MISS"
+      },
+      {
+        "role": "user",
+        "text": "Explain RAG architecture in detail. Cover web search, document extraction, chunking, embeddings, vector databases, retrieval, reranking, prompt construction, LLM generation, citations, caching, and evaluation."
+      },
+      {
+        "role": "assistant",
+        "text": "**Definition / Overview**  \nRetrieval\u2011Augmented Generation (RAG) is a pipeline that blends a semantic search engine with a large language model (LLM) so that the LLM can produce answers that are grounded in up\u2011to\u2011date, external knowledge. The system first pulls relevant text from a knowledge base, then feeds that text into the LLM\u2019s prompt, allowing the model to generate a concise, fact\u2011based response while reducing hallucinations. The architecture is typically broken into four stages: document ingestion, embedding & indexing, retrieval, and generation\u202f[1][2][5].\n\n---\n\n### Detailed Explanation\n\n| Stage | What Happens | Key Components | Typical Tools & Techniques | Trade\u2011offs |\n|-------|--------------|----------------|---------------------------|------------|\n| **1. Document Ingestion & Chunking** | Raw documents (web pages, PDFs, internal docs) are parsed and split into manageable chunks. Chunk size, overlap strategy, and preservation of document structure influence retrieval accuracy. Smaller chunks improve precision but lose context; larger chunks preserve context but add noise\u202f[6]. | Parser, chunker, overlap logic | Text extraction libraries (e.g., BeautifulSoup, PDFMiner), custom chunking scripts | Balancing context vs. noise |\n| **2. Embedding & Indexing** | Each chunk is encoded into a dense vector using an embedding model. The vectors are stored in a vector database or search index for fast similarity search. | Embedding model, vector store | OpenAI embeddings, Sentence\u2011Transformers, Pinecone, Weaviate, Milvus, FAISS | Embedding quality vs. index size |\n| **3. Retrieval** | A user query is encoded with the same model, then a nearest\u2011neighbor search retrieves the top\u2011k most relevant chunks. Retrieval can be augmented with reranking, caching, or feedback loops to improve relevance\u202f[7][8]. | Retriever, similarity search engine | FAISS, Annoy, HNSW, custom rerankers | Latency vs. recall |\n| **4. Integration & Prompt Construction** | Retrieved chunks are assembled into a prompt that the LLM consumes. The prompt may include context markers, question framing, or citation placeholders. This step can also perform summarization or filtering before generation\u202f[5]. | Prompt engineer, integration layer | Custom templates, prompt\u2011engineering libraries | Prompt size limits, token budget |\n| **5. Generation** | The LLM (e.g., GPT\u20114, Claude, Llama\u20112) generates the final answer, ideally citing the retrieved passages. The generation layer transforms raw knowledge into a concise, ready\u2011to\u2011use response, which is especially useful for support bots or internal assistants\u202f[4]. | Generator (LLM) | OpenAI API, Anthropic, Llama\u20112 | Hallucination risk, cost |\n\n---\n\n### Key Features / Mechanics\n\n| Feature | Description | Why It Matters |\n|---------|-------------|----------------|\n| **Semantic Search** | Uses embeddings to find semantically related text rather than keyword matches. | Improves relevance across large, heterogeneous datasets. |\n| **Vector Database** | Stores high\u2011dimensional vectors and supports fast nearest\u2011neighbor queries. | Enables scalable, low\u2011latency retrieval. |\n| **Retriever** | The component that actually queries the vector store and returns candidate passages. | The quality of retrieved evidence directly limits overall answer quality. |\n| **Reranking / Context Optimization** | Additional ranking or filtering steps that refine the retrieved set before it reaches the LLM. | Reduces noise and improves precision, especially in production pipelines\u202f[3]. |\n| **Prompt Engineering** | Structured prompt that includes context, question, and citation placeholders. | Controls how the LLM uses evidence and reduces hallucinations. |\n| **Generator (LLM)** | Produces the final answer, optionally citing evidence. | Provides fluent, human\u2011like responses. |\n| **Citation Generation** | The LLM can embed citations or references to the source chunks. | Enhances trustworthiness and traceability. |\n| **Caching** | Frequently retrieved passages can be cached to reduce latency and cost. | Improves performance for high\u2011traffic queries (not detailed in the sources but a common optimization). |\n| **Evaluation** | Metrics such as relevance, factual accuracy, latency, and cost are used to assess pipeline quality. | Guides tuning of each component. |\n\n---\n\n### Practical Example\n\n1. **Ingestion**  \n   *Document:* \u201cThe Eiffel Tower was completed in 1889 and stands 300\u202fm tall.\u201d  \n   *Chunk:* \u201cEiffel Tower completed 1889, 300\u202fm tall.\u201d  \n   *Embedding:* `[-0.12, 0.34, \u2026]` stored in the vector DB.\n\n2. **Retrieval**  \n   *Query:* \u201cWhen was the Eiffel Tower finished?\u201d  \n   *Query embedding:* `[-0.10, 0.30, \u2026]`  \n   *Result:* Top\u20111 chunk from the index.\n\n3. **Prompt Construction**  \n   ```\n   Context: Eiffel Tower completed 1889, 300\u202fm tall.\n   Question: When was the Eiffel Tower finished?\n   Answer:\n   ```\n\n4. **Generation**  \n   *LLM output:* \u201cThe Eiffel Tower was finished in 1889.\u201d  \n   *Citation:* \u201c(Source: Eiffel Tower facts, chunk 42)\u201d\n\nThis flow demonstrates how RAG transforms raw knowledge into a concise, evidence\u2011based answer, reducing hallucinations\u202f[4][5].\n\n---\n\n### Comparison & Trade\u2011offs\n\n| Aspect | Na\u00efve RAG | Advanced RAG (e.g., Context Engines, GraphRAG) |\n|--------|-----------|----------------------------------------------|\n| **Context Size** | Limited by prompt length (~4\u202fk tokens for GPT\u20114). | Uses context engines or graph structures to manage larger evidence sets. |\n| **Evidence Precision** | Relies on raw retrieved **Comparison & Trade\u2011offs (continued)**  \n\n| **Evidence Precision** | Relies on raw retrieved passages; noise can propagate to the LLM. | Reranking, graph traversal, or semantic filtering reduce irrelevant chunks, improving precision. |\n| **Latency** | Single\u2011step retrieval \u2192 prompt \u2192 generation; latency dominated by vector\u2011store query. | Additional reranking or graph traversal adds overhead but can be mitigated with caching or pre\u2011computed sub\u2011graphs. |\n| **Scalability** | Works well for moderate document collections; performance degrades with millions of chunks. | Designed for large\u2011scale knowledge bases; graph or hierarchical indexing keeps query times low. |\n| **Hallucination Risk** | Higher, because the LLM may fabricate facts when evidence is weak or missing. | Lower, as evidence is more tightly coupled to the answer and citations are explicitly generated. |\n| **Implementation Complexity** | Straightforward: embed, index, retrieve, prompt, generate. | Requires additional components (reranker, graph engine, citation extractor) and careful orchestration. |\n\n---\n\n## Practical Applications & Limitations\n\n| Use\u2011Case | How RAG Helps | Typical Constraints |\n|----------|---------------|---------------------|\n| **Customer Support Bots** | Provides up\u2011to\u2011date policy or product information from internal docs. | Requires frequent re\u2011ingestion of policy changes; latency must stay below 1\u202fs. |\n| **Academic Research Assistants** | Pulls relevant literature snippets to answer technical questions. | Citation accuracy is critical; the system must handle large PDF corpora. |\n| **Enterprise Knowledge Management** | Answers employee queries using internal wikis, SOPs, and codebases. | Data privacy and access control must be enforced; indexing can be costly. |\n| **Legal & Compliance** | Retrieves statutes, regulations, and case law to support legal drafting. | Legal texts are long and complex; context windows may truncate essential clauses. |\n| **Healthcare Decision Support** | Pulls clinical guidelines and patient records to aid diagnosis. | Strict regulatory compliance (HIPAA, GDPR) and high factual accuracy are mandatory. |\n\n**Limitations**\n\n1. **Retrieval Quality** \u2013 If the vector store misses relevant passages, the LLM cannot compensate.  \n2. **Prompt Length** \u2013 Even with advanced engines, the LLM\u2019s token budget limits how much evidence can be fed.  \n3. **Latency vs. Accuracy Trade\u2011off** \u2013 More sophisticated reranking or graph traversal improves precision but adds delay.  \n4. **Hallucination of Citations** \u2013 The LLM may still fabricate citation identifiers if the evidence set is noisy.  \n5. **Maintenance Overhead** \u2013 Updating embeddings, re\u2011indexing, and tuning rerankers require ongoing engineering effort.\n\n---\n\n## Summary / Key Takeaways\n\n- **RAG** blends retrieval and generation to produce evidence\u2011based answers, mitigating hallucinations compared to pure LLMs.  \n- The core pipeline consists of **ingestion \u2192 embedding \u2192 vector\u2011store indexing \u2192 retrieval \u2192 optional reranking \u2192 prompt construction \u2192 generation \u2192 citation**.  \n- **Advanced RAG** techniques (context engines, graph traversal, semantic reranking) extend scalability, precision, and context handling beyond naive prompt\u2011based retrieval.  \n- Practical deployments must balance **latency, accuracy, and maintenance cost**, especially in regulated domains.  \n- Continuous evaluation using relevance, factual accuracy, latency, and cost metrics is essential for production readiness.\n\n---\n\n## References\n\n[3]  \n[4]  \n[5]",
+        "sources": [
+          {
+            "title": "What Is RAG Architecture: How It Works & Key Benefits",
+            "meta": "Web Source \u00b7 www.truefoundry.com",
+            "snippet": "Retrieved web source context from What Is RAG Architecture: How It Works & Key Benefits (https://www.truefoundry.com/blog/rag-architecture).",
+            "url": "https://www.truefoundry.com/blog/rag-architecture"
+          },
+          {
+            "title": "End-to-End RAG Workflow: How Retrieval Augmented ...",
+            "meta": "Web Source \u00b7 www.databricks.com",
+            "snippet": "Retrieved web source context from End-to-End RAG Workflow: How Retrieval Augmented ... (https://www.databricks.com/blog/rag-workflow).",
+            "url": "https://www.databricks.com/blog/rag-workflow"
+          }
+        ],
+        "research_depth": "deep",
+        "sources_analyzed": 15,
+        "sources_used": 2,
+        "cache_mode": "RAG_MISS"
+      },
+      {
+        "role": "user",
+        "text": "Difference between HTTP and HTTPS"
+      },
+      {
+        "role": "assistant",
+        "text": "**HTTP vs. HTTPS \u2013 A Detailed Comparison**\n\n| Feature | HTTP | HTTPS |\n|---------|------|-------|\n| **Full Form** | Hypertext Transfer Protocol | Hypertext Transfer Protocol Secure |\n| **Encryption** | No encryption; data travels in plain text | Uses SSL/TLS encryption to secure the channel |\n| **Port** | Default port 80 | Default port 443 |\n| **Certificates** | Not required | Requires a digital (SSL/TLS) certificate installed on the server |\n| **Security** | Vulnerable to eavesdropping and Man\u2011in\u2011The\u2011Middle (MiTM) attacks | Provides confidentiality, integrity, and authentication; largely immune to MiTM |\n| **Typical Use** | Non\u2011sensitive data, legacy sites | Secure transactions, login pages, e\u2011commerce, any data that must remain confidential |\n\n---\n\n### 1. Definition / Overview  \nHTTP (Hypertext Transfer Protocol) is the foundational protocol that browsers use to request and receive web pages. HTTPS (Hypertext Transfer Protocol Secure) is the same protocol with an added layer of security: SSL/TLS encryption and server authentication via digital certificates. The \u201cS\u201d in HTTPS stands for \u201cSecure\u201d and indicates that the communication channel is encrypted and authenticated [1][3].\n\n### 2. Key Technical Differences  \n\n| Aspect | HTTP | HTTPS |\n|--------|------|-------|\n| **Encryption** | None \u2013 data is sent in clear text, readable by anyone on the network | SSL/TLS encrypts all data, preventing third\u2011party interception or tampering [1][3] |\n| **Port Numbers** | Uses port 80 by default | Uses port 443 by default; this is the standard for secure HTTP traffic [2][4] |\n| **Certificates** | No certificate requirement | Requires a valid SSL/TLS certificate installed on the server; the certificate is used to authenticate the server to the client and to establish the encrypted session [2][4] |\n| **Security Risks** | Susceptible to eavesdropping, data tampering, and MiTM attacks | Provides protection against eavesdropping and MiTM; the certificate ensures the client is talking to the legitimate server [4] |\n\n### 3. Security Implications  \n\n- **Confidentiality** \u2013 HTTPS encrypts the entire payload, so sensitive information (e.g., passwords, credit\u2011card numbers) cannot be read by attackers intercepting the traffic.  \n- **Integrity** \u2013 SSL/TLS ensures that data sent between client and server is not altered in transit.  \n- **Authentication** \u2013 The server\u2019s digital certificate proves its identity to the client, preventing attackers from impersonating the site.  \n\nHTTP, lacking these protections, is considered \u201chackable\u201d and is vulnerable to Man\u2011in\u2011The\u2011Middle (MiTM) attacks and passive eavesdropping [4].\n\n### 4. Practical Use Cases  \n\n| Scenario | Recommended Protocol |\n|----------|----------------------|\n| Public informational pages (no sensitive data) | HTTP (though many sites now default to HTTPS for consistency) |\n| User login pages, banking, e\u2011commerce checkout | HTTPS \u2013 mandatory for protecting credentials and payment data |\n| API endpoints that transmit personal or financial data | HTTPS \u2013 required by most regulatory standards |\n| Internal corporate networks with strict security policies | HTTPS \u2013 ensures data confidentiality even within the intranet |\n\n### 5. Implementation Considerations  \n\n- **Certificate Acquisition** \u2013 HTTPS requires a valid SSL/TLS certificate, which can be obtained from a Certificate Authority (CA) or generated as a self\u2011signed certificate for testing.  \n- **Server Configuration** \u2013 The web server must be configured to listen on port 443 and to use the certificate for TLS handshakes.  \n- **Performance** \u2013 While encryption adds computational overhead, modern hardware and TLS 1.3 optimizations minimize latency.  \n- **Legacy Support** \u2013 Some older browsers or devices may not support the latest TLS versions; fallback mechanisms may be needed.\n\n### 6. Limitations & Trade\u2011offs  \n\n| Limitation | Impact | Mitigation |\n|------------|--------|------------|\n| **Certificate Cost** | Commercial certificates can be expensive for large deployments | Use free CAs (e.g., Let\u2019s Encrypt) or internal CAs for internal use |\n| **Setup Complexity** | Requires server configuration and certificate management | Automate with tools like Certbot or managed hosting services |\n| **Performance Overhead** | Encryption/decryption consumes CPU resources | Use TLS 1.3, enable HTTP/2, and leverage hardware acceleration |\n| **Port Conflicts** | Port 443 may be blocked in some networks | Use alternative ports with proper firewall rules (though not standard) |\n\n### 7. Summary / Key Takeaways  \n\n- **HTTPS is HTTP with SSL/TLS encryption and server authentication.**  \n- **HTTP sends data in plain text on port 80; HTTPS encrypts data on port 443 using a digital certificate.**  \n- **HTTPS protects against eavesdropping, tampering, and MiTM attacks, making it essential for any site handling sensitive information.**  \n- **Implementing HTTPS requires obtaining a certificate and configuring the server, but the security benefits far outweigh the added complexity.**  \n\n### 8. References  \n\n- [HTTP vs. HTTPS: What's the Difference? \u2013 Rublon](https://rublon.com/blog/http-vs-https-whats-the-difference)  \n- [HTTP vs HTTPS: What's the Difference? \u2013 Keyfactor](https://www.keyfactor.com/blog/http-vs-https-whats-the-difference)  \n- [HTTP vs HTTPS \u2013 Silktide Glossary](https://silktide.com/glossary/http-vs-https)  \n- [HTTP vs. HTTPS: What's the Difference? \u2013 Rublon (duplicate)](https://rublon.com/blog/http-vs-https-whats-the-difference)  \n- [Difference between http:// and https:// \u2013 GeeksforGeeks](https://www.geeksforgeeks.org/computer-networks/difference-between-http-and-https)",
+        "sources": [
+          {
+            "title": "HTTP vs. HTTPS: What's the Difference?",
+            "meta": "Web Source \u00b7 rublon.com",
+            "snippet": "Retrieved web source context from HTTP vs. HTTPS: What's the Difference? (https://rublon.com/blog/http-vs-https-whats-the-difference).",
+            "url": "https://rublon.com/blog/http-vs-https-whats-the-difference"
+          },
+          {
+            "title": "HTTP vs HTTPS: What's the Difference?",
+            "meta": "Web Source \u00b7 www.keyfactor.com",
+            "snippet": "Retrieved web source context from HTTP vs HTTPS: What's the Difference? (https://www.keyfactor.com/blog/http-vs-https-whats-the-difference).",
+            "url": "https://www.keyfactor.com/blog/http-vs-https-whats-the-difference"
+          },
+          {
+            "title": "HTTP vs HTTPS",
+            "meta": "Web Source \u00b7 silktide.com",
+            "snippet": "Retrieved web source context from HTTP vs HTTPS (https://silktide.com/glossary/http-vs-https).",
+            "url": "https://silktide.com/glossary/http-vs-https"
+          }
+        ],
+        "research_depth": "deep",
+        "sources_analyzed": 13,
+        "sources_used": 3,
+        "cache_mode": "RAG_MISS"
+      }
+    ]
+  },
+  {
+    "id": "chat_0fa6eu0r_1790529479791",
+    "title": "What is binary search?",
+    "active": true,
+    "messages": [
+      {
+        "role": "user",
+        "text": "What is binary search?"
+      },
+      {
+        "role": "assistant",
+        "text": "**Definition / Overview**  \nBinary search (also called half\u2011interval search, logarithmic search, or binary chop) is a search algorithm that finds the position of a target value in a **sorted array**. It repeatedly compares the target to the middle element and discards the half in which the target cannot lie, narrowing the search interval until the target is found or the interval becomes empty\u30104\u3011.\n\n**How it works**  \n1. Identify the middle element of the current interval.  \n2. Compare the target value with this middle element.  \n   - If equal \u2192 return the index.  \n   - If the target is smaller \u2192 continue the search in the lower half.  \n   - If the target is larger \u2192 continue the search in the upper half.  \n3. Repeat steps\u202f1\u20112 on the remaining half.  \nEach iteration eliminates half of the remaining elements, so the algorithm runs in **O(log\u202fn)** time in the worst and average cases, with **O(1)** best\u2011case time when the middle element is the target\u30105\u3011. The space usage is constant, **O(1)**\u30105\u3011.\n\n**Key characteristics**  \n- **Precondition:** Input array must be sorted.  \n- **Data structure:** Typically applied to arrays (or any random\u2011access sequence).  \n- **Complexity:**  \n  - Worst\u2011case time: *O(log\u202fn)*  \n  - Best\u2011case time: *O(1)* (target at the middle)  \n  - Space: *O(1)*  \n- **Optimality:** It is optimal for comparison\u2011based searching on sorted arrays\u30105\u3011.\n\n**Simple example (pseudocode)**  \n\n```text\nfunction binarySearch(arr, target):\n    low  = 0\n    high = length(arr) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid               // found\n        else if arr[mid] < target:\n            low = mid + 1            // search upper half\n        else:\n            high = mid - 1           // search lower half\n    return -1                        // not found\n```\n\n**Practical uses**  \n- Looking up values in sorted lists, databases, or index files.  \n- Underlying operation in many higher\u2011level algorithms (e.g., finding insertion points, solving decision problems).  \n\n**Summary**  \nBinary search efficiently locates a target in a sorted array by repeatedly halving the search interval, achieving logarithmic time complexity with constant extra space.\n\n**References**  \n- [Binary search \u2013 Wikipedia](https://en.wikipedia.org/wiki/Binary_search)\u30104\u3011  \n- [Binary search \u2013 Wikipedia (performance table)](https://en.wikipedia.org/wiki/Binary_search)\u30105\u3011",
+        "sources": [
+          {
+            "title": "Binary search",
+            "meta": "Web Source \u00b7 en.wikipedia.org",
+            "snippet": "Retrieved web source context from Binary search (https://en.wikipedia.org/wiki/Binary_search).",
+            "url": "https://en.wikipedia.org/wiki/Binary_search"
+          }
+        ],
+        "research_depth": "quick",
+        "sources_analyzed": 5,
+        "sources_used": 1,
+        "cache_mode": "MONGODB_HIT"
+      },
+      {
+        "role": "user",
+        "text": "How does it work?"
+      },
+      {
+        "role": "assistant",
+        "text": "**How Binary Search Works**\n\n**Definition / Overview**  \nBinary search is a comparison\u2011based algorithm that locates a target value in a **sorted array** (or more generally, in a sorted data structure). It repeatedly divides the search interval in half, eliminating the half that cannot contain the target. The algorithm runs in\u202fO(log\u202fn) time, making at most \u2308log\u2082\u202fn\u2309 comparisons in the worst case.  \n[1][3][5]\n\n**Detailed Explanation**  \n1. **Start with the full array** \u2013 set `low = 0` and `high = n\u20111`.  \n2. **Find the middle index** \u2013 `mid = (low + high) / 2`.  \n3. **Compare** the middle element with the target.  \n   * If equal, the search succeeds and returns `mid`.  \n   * If the target is less than the middle element, set `high = mid\u20111` (search the lower half).  \n   * If the target is greater, set `low = mid+1` (search the upper half).  \n4. **Repeat** steps 2\u20133 until `low > high`. If the loop ends without a match, the target is absent.  \n   The algorithm eliminates half of the remaining elements each iteration, so the number of iterations grows logarithmically with the array size.  \n[3]\n\n**Key Features / Mechanics**  \n- **Logarithmic depth**: Each comparison cuts the search space in half, giving the fewest possible levels in a comparison tree.  \n- **Average comparisons**: On average, each iteration performs 1.5 comparisons (checking equality and then a less\u2011than/greater\u2011than test). A variant that defers the equality check can save half a comparison per iteration but may add an extra iteration on average.  \n  [2]  \n- **Optimal for comparison\u2011only searches**: No other algorithm that uses only comparisons can achieve better average or worst\u2011case performance.  \n  [4]  \n- **Requires sorted input**: The array (or structure) must be sorted beforehand; otherwise the halving strategy fails.  \n  [5]  \n\n**Example**  \nSuppose we search for `42` in the sorted array `[3, 7, 12, 19, 27, 34, 42, 56, 63]`.  \n1. `mid = 4` \u2192 element `27` < `42` \u2192 search upper half (`low = 5`).  \n2. `mid = 6` \u2192 element `42` = `42` \u2192 found at index\u202f6.  \nOnly two iterations were needed, illustrating the logarithmic speed.  \n[3]\n\n**Practical Applications & Limitations**  \n- Useful for quickly locating items, or finding the next\u2011smallest/largest element when the target is absent.  \n- Not suitable for unsorted data; sorting first may outweigh the search benefit for small arrays.  \n- Hash tables can outperform binary search for exact lookups but lack the ability to find nearest neighbors.  \n  [5]\n\n**Summary / Key Takeaways**  \n- Binary search repeatedly halves a sorted search space.  \n- It guarantees O(log\u202fn) comparisons and is optimal among comparison\u2011only methods.  \n- Requires sorted input; otherwise the algorithm fails.  \n- Variants can trade a tiny per\u2011iteration cost for a possible extra iteration.  \n\n**References**  \n- [Binary search \u2013 Wikipedia](https://en.wikipedia.org/wiki/Binary_search) (Sources\u202f1,\u202f3,\u202f5)  \n- [Binary search \u2013 Wikipedia (comparisons)](https://en.wikipedia.org/wiki/Binary_search) (Source\u202f2)  \n- [Binary search \u2013 Wikipedia (optimality)](https://en.wikipedia.org/wiki/Binary_search) (Source\u202f4)",
+        "sources": [],
+        "research_depth": "quick",
+        "sources_analyzed": 5,
+        "sources_used": 0,
+        "cache_mode": "SEMANTIC_HIT"
+      }
+    ]
+  },
+  {
+    "id": "chat_isut6afh_1790529456704",
+    "title": "What is MongoDB?",
+    "active": true,
+    "messages": [
+      {
+        "role": "user",
+        "text": "What is MongoDB?"
+      },
+      {
+        "role": "assistant",
+        "text": "**Definition / Overview**  \nMongoDB is a **document\u2011oriented database** that stores data as flexible, JSON\u2011like BSON documents. It is designed to let developers model data in the same way their application code does, enabling rapid development and easy handling of non\u2011uniform data structures\u30105\u3011.\n\n**Key Features**  \n- **Flexible schema** \u2013 documents can evolve without downtime, allowing quick iteration\u30105\u3011.  \n- **Powerful query engine** \u2013 supports rich queries, aggregation pipelines, and indexing\u30105\u3011.  \n- **Horizontal scaling & high availability** \u2013 built\u2011in sharding and replica sets let the database grow and stay resilient\u30105\u3011.  \n- **Full\u2011transaction support** \u2013 ACID\u2011compliant transactions across multiple documents and collections\u30105\u3011.  \n- **Broad language support** \u2013 client libraries are available for almost every modern programming language, with detailed API references for each\u30101\u3011.\n\n**Practical Use**  \nMongoDB is suited for everything from rapid prototyping to large, mission\u2011critical workloads, making it a common choice for modern applications that need flexible data models and scalable performance\u30105\u3011.\n\n**Summary**  \nMongoDB is a fully transactional, horizontally scalable document database that stores data as BSON documents, offering a flexible schema, rich query capabilities, and extensive language\u2011specific client libraries to accelerate modern application development\u30105\u3011\u30101\u3011.\n\n**References**  \n- [What is MongoDB? \u2013 Database Manual](https://www.mongodb.com/docs/manual)\u30105\u3011  \n- [MongoDB Docs \u2013 Client Libraries](https://www.mongodb.com/docs)\u30101\u3011",
+        "sources": [
+          {
+            "title": "Welcome to the MongoDB Docs - MongoDB Documentation - MongoDB Docs",
+            "meta": "Web Source \u00b7 www.mongodb.com",
+            "snippet": "Retrieved web source context from Welcome to the MongoDB Docs - MongoDB Documentation - MongoDB Docs (https://www.mongodb.com/docs).",
+            "url": "https://www.mongodb.com/docs"
+          },
+          {
+            "title": "introduction to mongodb for developers blog",
+            "meta": "Web Source \u00b7 www.icertglobal.com",
+            "snippet": "Retrieved web source context from introduction to mongodb for developers blog (https://www.icertglobal.com/blog/introduction-to-mongodb-for-developers-blog).",
+            "url": "https://www.icertglobal.com/blog/introduction-to-mongodb-for-developers-blog"
+          },
+          {
+            "title": "Development - MongoDB Documentation - MongoDB Docs",
+            "meta": "Web Source \u00b7 www.mongodb.com",
+            "snippet": "Retrieved web source context from Development - MongoDB Documentation - MongoDB Docs (https://www.mongodb.com/docs/development).",
+            "url": "https://www.mongodb.com/docs/development"
+          },
+          {
+            "title": "What is MongoDB? - Database Manual",
+            "meta": "Web Source \u00b7 www.mongodb.com",
+            "snippet": "Retrieved web source context from What is MongoDB? - Database Manual (https://www.mongodb.com/docs/manual).",
+            "url": "https://www.mongodb.com/docs/manual"
+          }
+        ],
+        "research_depth": "quick",
+        "sources_analyzed": 4,
+        "sources_used": 4,
+        "cache_mode": "RAG_MISS"
+      }
+    ]
+  },
+  {
+    "id": "chat_uxj872if_1790529422516",
+    "title": "How does it work?",
+    "active": true,
+    "messages": [
+      {
+        "role": "user",
+        "text": "How does it work?"
+      },
+      {
+        "role": "assistant",
+        "text": "Could you please clarify what topic or item you are referring to?",
+        "sources": [],
+        "research_depth": "quick",
+        "sources_analyzed": 0,
+        "sources_used": 0,
+        "cache_mode": "AMBIGUOUS_CONTEXT"
+      }
+    ]
+  },
+  {
+    "id": "chat_nl2ylw4g_1790529350266",
+    "title": "What is binary search?",
+    "active": true,
+    "messages": [
+      {
+        "role": "user",
+        "text": "What is binary search?"
+      },
+      {
+        "role": "assistant",
+        "text": "**Definition / Overview**  \nBinary search (also called half\u2011interval search, logarithmic search, or binary chop) is a search algorithm that finds the position of a target value in a **sorted array**. It repeatedly compares the target to the middle element and discards the half in which the target cannot lie, narrowing the search interval until the target is found or the interval becomes empty\u30104\u3011.\n\n**How it works**  \n1. Identify the middle element of the current interval.  \n2. Compare the target value with this middle element.  \n   - If equal \u2192 return the index.  \n   - If the target is smaller \u2192 continue the search in the lower half.  \n   - If the target is larger \u2192 continue the search in the upper half.  \n3. Repeat steps\u202f1\u20112 on the remaining half.  \nEach iteration eliminates half of the remaining elements, so the algorithm runs in **O(log\u202fn)** time in the worst and average cases, with **O(1)** best\u2011case time when the middle element is the target\u30105\u3011. The space usage is constant, **O(1)**\u30105\u3011.\n\n**Key characteristics**  \n- **Precondition:** Input array must be sorted.  \n- **Data structure:** Typically applied to arrays (or any random\u2011access sequence).  \n- **Complexity:**  \n  - Worst\u2011case time: *O(log\u202fn)*  \n  - Best\u2011case time: *O(1)* (target at the middle)  \n  - Space: *O(1)*  \n- **Optimality:** It is optimal for comparison\u2011based searching on sorted arrays\u30105\u3011.\n\n**Simple example (pseudocode)**  \n\n```text\nfunction binarySearch(arr, target):\n    low  = 0\n    high = length(arr) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid               // found\n        else if arr[mid] < target:\n            low = mid + 1            // search upper half\n        else:\n            high = mid - 1           // search lower half\n    return -1                        // not found\n```\n\n**Practical uses**  \n- Looking up values in sorted lists, databases, or index files.  \n- Underlying operation in many higher\u2011level algorithms (e.g., finding insertion points, solving decision problems).  \n\n**Summary**  \nBinary search efficiently locates a target in a sorted array by repeatedly halving the search interval, achieving logarithmic time complexity with constant extra space.\n\n**References**  \n- [Binary search \u2013 Wikipedia](https://en.wikipedia.org/wiki/Binary_search)\u30104\u3011  \n- [Binary search \u2013 Wikipedia (performance table)](https://en.wikipedia.org/wiki/Binary_search)\u30105\u3011",
+        "sources": [
+          {
+            "title": "Binary search",
+            "meta": "Web Source \u00b7 en.wikipedia.org",
+            "snippet": "Retrieved web source context from Binary search (https://en.wikipedia.org/wiki/Binary_search).",
+            "url": "https://en.wikipedia.org/wiki/Binary_search"
+          }
+        ],
+        "research_depth": "quick",
+        "sources_analyzed": 5,
+        "sources_used": 1,
+        "cache_mode": "RAG_MISS"
+      },
+      {
+        "role": "user",
+        "text": "How does it work?"
+      },
+      {
+        "role": "assistant",
+        "text": "**How Binary Search Works**\n\n**Definition / Overview**  \nBinary search is a comparison\u2011based algorithm that locates a target value in a **sorted array** (or more generally, in a sorted data structure). It repeatedly divides the search interval in half, eliminating the half that cannot contain the target. The algorithm runs in\u202fO(log\u202fn) time, making at most \u2308log\u2082\u202fn\u2309 comparisons in the worst case.  \n[1][3][5]\n\n**Detailed Explanation**  \n1. **Start with the full array** \u2013 set `low = 0` and `high = n\u20111`.  \n2. **Find the middle index** \u2013 `mid = (low + high) / 2`.  \n3. **Compare** the middle element with the target.  \n   * If equal, the search succeeds and returns `mid`.  \n   * If the target is less than the middle element, set `high = mid\u20111` (search the lower half).  \n   * If the target is greater, set `low = mid+1` (search the upper half).  \n4. **Repeat** steps 2\u20133 until `low > high`. If the loop ends without a match, the target is absent.  \n   The algorithm eliminates half of the remaining elements each iteration, so the number of iterations grows logarithmically with the array size.  \n[3]\n\n**Key Features / Mechanics**  \n- **Logarithmic depth**: Each comparison cuts the search space in half, giving the fewest possible levels in a comparison tree.  \n- **Average comparisons**: On average, each iteration performs 1.5 comparisons (checking equality and then a less\u2011than/greater\u2011than test). A variant that defers the equality check can save half a comparison per iteration but may add an extra iteration on average.  \n  [2]  \n- **Optimal for comparison\u2011only searches**: No other algorithm that uses only comparisons can achieve better average or worst\u2011case performance.  \n  [4]  \n- **Requires sorted input**: The array (or structure) must be sorted beforehand; otherwise the halving strategy fails.  \n  [5]  \n\n**Example**  \nSuppose we search for `42` in the sorted array `[3, 7, 12, 19, 27, 34, 42, 56, 63]`.  \n1. `mid = 4` \u2192 element `27` < `42` \u2192 search upper half (`low = 5`).  \n2. `mid = 6` \u2192 element `42` = `42` \u2192 found at index\u202f6.  \nOnly two iterations were needed, illustrating the logarithmic speed.  \n[3]\n\n**Practical Applications & Limitations**  \n- Useful for quickly locating items, or finding the next\u2011smallest/largest element when the target is absent.  \n- Not suitable for unsorted data; sorting first may outweigh the search benefit for small arrays.  \n- Hash tables can outperform binary search for exact lookups but lack the ability to find nearest neighbors.  \n  [5]\n\n**Summary / Key Takeaways**  \n- Binary search repeatedly halves a sorted search space.  \n- It guarantees O(log\u202fn) comparisons and is optimal among comparison\u2011only methods.  \n- Requires sorted input; otherwise the algorithm fails.  \n- Variants can trade a tiny per\u2011iteration cost for a possible extra iteration.  \n\n**References**  \n- [Binary search \u2013 Wikipedia](https://en.wikipedia.org/wiki/Binary_search) (Sources\u202f1,\u202f3,\u202f5)  \n- [Binary search \u2013 Wikipedia (comparisons)](https://en.wikipedia.org/wiki/Binary_search) (Source\u202f2)  \n- [Binary search \u2013 Wikipedia (optimality)](https://en.wikipedia.org/wiki/Binary_search) (Source\u202f4)",
+        "sources": [
+          {
+            "title": "Binary search",
+            "meta": "Web Source \u00b7 en.wikipedia.org",
+            "snippet": "Retrieved web source context from Binary search (https://en.wikipedia.org/wiki/Binary_search).",
+            "url": "https://en.wikipedia.org/wiki/Binary_search"
+          }
+        ],
+        "research_depth": "quick",
+        "sources_analyzed": 5,
+        "sources_used": 1,
+        "cache_mode": "KNOWLEDGE_REUSE"
+      }
+    ]
+  },
+  {
+    "id": "chat_default01",
+    "title": "New chat",
+    "active": true,
+    "messages": []
+  }
+]
