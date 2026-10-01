@@ -6,6 +6,7 @@ import atexit
 import sys
 import logging
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
 from phase10.web_grounded_rag import WebGroundedRAGPipeline
@@ -27,6 +28,20 @@ os.makedirs(os.path.dirname(CHATS_FILE), exist_ok=True)
 app = Flask(__name__, template_folder=os.path.join(BASE_DIR, "templates"), static_folder=os.path.join(BASE_DIR, "static"))
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024  # 32MB max upload
+
+# Configure CORS safely for production cross-origin deployment
+frontend_urls_raw = os.getenv("FRONTEND_URL") or os.getenv("CORS_ORIGINS") or ""
+if frontend_urls_raw:
+    allowed_origins = [u.strip() for u in frontend_urls_raw.split(",") if u.strip()]
+else:
+    allowed_origins = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
+    ]
+
+CORS(app, origins=allowed_origins, supports_credentials=True, allow_headers=["Content-Type", "Authorization"])
 
 # Global RAG pipeline instance
 try:
@@ -404,4 +419,4 @@ def clear():
         return jsonify({"success": False, "error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5001, debug=True)
+    app.run(host="127.0.0.1", port=5001, debug=False)

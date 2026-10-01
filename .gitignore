@@ -1,9 +1,65 @@
+# Environment variables / secrets
 .env
+.env.*
+!.env.example
+
+# Python
 .venv/
+venv/
+env/
+ENV/
+
+__pycache__/
 **/__pycache__/
-**/*.pyc
+*.py[cod]
+*$py.class
+
+# Logs
 logs/
+*.log
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploads
+uploads/
+
+# Local cache/state
+cache/sessions.json
+cache/scraped_pages.json*
+cache/*.migrated
+
+# Vector stores / temporary data
 .chroma_temp/
+.chroma/
+chroma_db/
+vector_store/
+
+# Generated test output
+test_out.txt
+test_out_u.txt
+test_results.log
+results/*.json
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
 .DS_Store
-# Local database
-cache/rag_cache.db
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints
