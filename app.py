@@ -108,7 +108,10 @@ def get_current_user_info():
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return jsonify({
+        "service": "SourceIQ RAG Backend API",
+        "status": "online"
+    })
 
 # ── Authentication Endpoints ──────────────────────────────────────────────────
 
